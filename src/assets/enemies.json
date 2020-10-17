@@ -1,0 +1,60 @@
+{
+  "enemies": [
+    {
+      "name": "Slime",
+      "stats": {
+        "lvl": 1,
+        "hp": 20,
+        "maxHp": 20,
+        "mp": 0,
+        "maxMp": 0,
+        "atk": 2,
+        "def": 1,
+        "exp": 4,
+        "gold": 5
+      }
+    },
+    {
+      "name": "Undead",
+      "stats": {
+        "lvl": 1,
+        "hp": 20,
+        "maxHp": 20,
+        "mp": 0,
+        "maxMp": 0,
+        "atk": 2,
+        "def": 2,
+        "exp": 3,
+        "gold": 3
+      }
+    },
+    {
+      "name": "Thief",
+      "stats": {
+        "lvl": 1,
+        "hp": 15,
+        "maxHp": 15,
+        "mp": 0,
+        "maxMp": 0,
+        "atk": 1,
+        "def": 1,
+        "exp": 2,
+        "gold": 3
+      }
+    },
+    {
+      "name": "Bat",
+      "stats": {
+        "lvl": 2,
+        "hp": 10,
+        "maxHp": 10,
+        "mp": 0,
+        "maxMp": 0,
+        "atk": 4,
+        "def": 3,
+        "exp": 5,
+        "gold": 7
+      }
+    }
+  ]
+}

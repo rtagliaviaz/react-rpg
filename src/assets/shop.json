@@ -1,0 +1,12 @@
+{
+  "items": [
+    {
+      "name": "Healing Potion",
+      "description": "Restores 20 HP",
+      "buyPrice": 10,
+      "sellPrice": 5,
+      "category": "hp",
+      "restore": 20
+    }
+  ]
+}
