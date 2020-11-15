@@ -16,12 +16,6 @@ import swords from '../assets/icons/swords.png'
 import hpPotion from '../assets/icons/healingPotion.png'
 import mpPotion from '../assets/icons/manaPotion.png'
 
-import bat from '../assets/enemies/bat.png'
-import slime from '../assets/enemies/slime.jpg'
-import undead from '../assets/enemies/undead.png'
-import thief from '../assets/enemies/thief.jpg'
-
-
 const Player = () => {
   //player
   const [name, setName] = useState('Hero')
@@ -242,7 +236,7 @@ const Player = () => {
 
     switch (item.name) {
       case 'Healing Potion':
-        let healingPotion = stats.hp+5
+        let healingPotion = stats.hp+20
         if (healingPotion <= stats.maxHp) {
           setStats({...stats, hp: healingPotion})
         } else {
