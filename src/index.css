@@ -11,3 +11,230 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.container {
+  margin: 50px;
+}
+
+/*battle*/
+
+.battle {
+  position: relative;
+  left: 150px;
+  bottom: 50px;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 400px;
+  height: 280px
+}
+
+.enemy-info{
+  /* position: relative; */
+  display: flex;
+  justify-content: space-around;
+}
+
+.enemy-info h3,
+.enemy-info p {
+  width: 100px;
+}
+
+.enemy-img{
+  width: 80px;
+  height: 80px;
+  margin: 5px 0;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+.battle-actions{
+  position: relative;
+  bottom: -80px;
+  left: 70px;
+  right: 0px;
+  display: flex;
+  width: 250px;
+  height: 100px;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 5px;
+  justify-content: space-between;
+  align-content: space-between;
+  flex-wrap: wrap;
+}
+
+.battle-actions div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cursor {
+  display: none;
+  font-size: 20px;
+  /* background: blue; */
+  margin: 0;
+  padding: 0px;
+  width: 20px;
+}
+
+.battle-actions div:hover
+.cursor{
+  display: block;
+}
+
+
+.battle-actions button{
+  width: 80px;
+  height: 40px;
+  margin: 0px;
+  background: none;
+  border: none;
+  font-weight: bold;
+  padding: 0px;
+  /* background: red; */
+}
+
+.message-box {
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 350px;
+  padding: 10px;
+  background-color: none;
+  /* background-color: rgba(0, 0, 0, 0.7); */
+  font-size: 20px;
+}
+
+.message-box button {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: 1px solid white;
+  border-radius: 5px;
+}
+
+
+/*  Hero UI */
+
+.playerUI {
+  display: flex;
+  width: 600px;
+  height: 50px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 20px 0;
+  justify-content: space-around;
+}
+
+.playerUI-img {
+  width: 42px;
+}
+
+.playerUI p {
+  font-size: 20px;
+}
+
+/*options menu*/
+
+.options-menu {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.options-menu button {
+  width: 100px;
+  margin-top: 15px;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.options-img {
+  width: 50px;
+  height: 50px;
+}
+
+.battle-btn {
+  width: 100px;
+  background: none;
+  border: none;
+}
+
+/*stats*/
+.stats{
+  position: absolute;
+  bottom: 150px;
+  left: 220px;
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 300px;
+  height: 300px;
+}
+
+.stats p {
+  text-align: center;
+  font-size: 18px;
+  margin-top: 5px;
+}
+
+/*inventory*/
+.inventory{
+  position: absolute;
+  bottom: 150px;
+  left: 220px;
+  padding: 5px;
+  border: 2px solid black;
+  border-radius: 5px;
+  width: 300px;
+  height: 300px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.inv {
+  position: relative;
+  border: 1px solid black;
+  width: 140px;
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: center;
+  font-weight: bold;
+}
+
+
+
+.inventory-img{
+  display: block;
+  margin-left: 40px;
+  margin-right: 40px;
+  width: 36%;
+}
+
+.item-desc {
+  position: absolute;
+  background-color: black;
+  color: white;
+  text-align: center;
+  width: 140px;
+  height: 70px;
+  top: 28px;
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.8); /* Black see-through */
+  transition: .5s ease;
+  opacity: 0;
+}
+
+.inv:hover .item-desc {
+  opacity: 1;
+}
+
+.item-btn {
+  background: none;
+  width: 50px;
+  margin-top: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+

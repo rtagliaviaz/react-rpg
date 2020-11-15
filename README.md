@@ -20,12 +20,13 @@ RPG basico hecho con ReactJS
 - [] shop
 - [] restore items
 - [] weapons (sword, axe), armor (chest, legs, helmet)
-- [] options: stats, inventory, rest
-- [] condition to rest
+- [x] options: stats, inventory, rest
+- [x] condition to rest
 - [x] commands: item, defend, magic
-- [] display gold
+- [x] display gold
 - [] alerts when lvl up
 - [] some avatars 
-- [] css styles
+- [] improve UI
 - [] enemies can drop items
 - [] if player dies lose gold and random item
+- [x] improve the useItem function

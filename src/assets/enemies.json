@@ -12,7 +12,8 @@
         "def": 1,
         "exp": 4,
         "gold": 5
-      }
+      },
+      "img": "slime.jpg"
     },
     {
       "name": "Undead",
@@ -26,7 +27,8 @@
         "def": 2,
         "exp": 3,
         "gold": 3
-      }
+      },
+      "img": "undead.png"
     },
     {
       "name": "Thief",
@@ -40,7 +42,8 @@
         "def": 1,
         "exp": 2,
         "gold": 3
-      }
+      },
+      "img": "thief.jpg"
     },
     {
       "name": "Bat",
@@ -54,7 +57,8 @@
         "def": 3,
         "exp": 5,
         "gold": 7
-      }
+      },
+      "img": "bat.png"
     }
   ]
 }

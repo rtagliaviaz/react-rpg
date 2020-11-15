@@ -3,8 +3,24 @@ import React, {useState} from 'react'
 //enemies
 import enemies from '../assets/enemies.json'
 
-//picture
-import player from '../assets/pics/player.jpg'
+//resources
+import hp from '../assets/icons/hp.png'
+import mana from '../assets/icons/mana.png'
+import gold from '../assets/icons/gold.png'
+
+import bed from '../assets/icons/rest.png'
+import backpack from '../assets/icons/inventory.png'
+import statsIcon from '../assets/icons/stats.png'
+import swords from '../assets/icons/swords.png'
+
+import hpPotion from '../assets/icons/healingPotion.png'
+import mpPotion from '../assets/icons/manaPotion.png'
+
+import bat from '../assets/enemies/bat.png'
+import slime from '../assets/enemies/slime.jpg'
+import undead from '../assets/enemies/undead.png'
+import thief from '../assets/enemies/thief.jpg'
+
 
 const Player = () => {
   //player
@@ -24,19 +40,31 @@ const Player = () => {
   
   //inventory
   const [inventory, setInventory] = useState([
-    {
-      name: 'Healing Potion',
-      description: 'Restores 20 HP',
-      use: true
+     {
+      slot: 1,
+      item: {
+          name: 'Healing Potion',
+          description: 'Restores 20 HP',
+          image: hpPotion,
+          use: true
+        },
     },
     {
-      name: 'Mana Potion',
-      description: 'Restores 10 MP',
-      use: true
+      slot: 2,
+      item: {
+        name: 'Mana Potion',
+        description: 'Restores 10 MP',
+        image: mpPotion,
+        use: true
+      }
     },
     {
+      slot: 3,
+      item: {}
     },
     {
+      slot: 4,
+      item: {}
     }
   ])
 
@@ -63,7 +91,8 @@ const Player = () => {
       def: '',
       exp: '',
       gold: ''
-    }
+    },
+    img: ""
   })
 
   const [displayEnemy, setDisplayEnemy] = useState(false)
@@ -73,7 +102,8 @@ const Player = () => {
     battle: '',
     gains: '',
     lvlUp: '',
-    item: ''
+    item: '',
+    npc: ''
   })
 
 
@@ -170,8 +200,17 @@ const Player = () => {
 
   //rest
   const rest = () => {
+    if (stats.gold < 5) {
+      setMsg({npc: 'Sorry. You dont have enough gold!'})
+      // alert('Sorry. You dont have enough gold!')
+      setTimeout(() => {
+        setMsg({npc: ''})
+      }, 1500);
+      return
+    }
     const maxHp = stats.maxHp
-    setStats({...stats, hp: maxHp})
+    const maxMp = stats.maxMp
+    setStats({...stats, hp: maxHp, mp: maxMp, gold: stats.gold-5})
   }
 
   //clear ui messages
@@ -179,45 +218,127 @@ const Player = () => {
     setMsg({
       battle: '',
       gains: '',
-      lvlUp: ''
+      lvlUp: '',
+      npc: ''
     })
     setDisplayEnemy(false)
+  }
+
+  const usItem = (e, item, i) => {
+    e.preventDefault()
+    console.log(item)
+    console.log(i)
+ 
+
+    // if (item.name === 'Healing Potion') {
+    //   let recovery = stats.hp+5
+    //   if (recovery <= stats.maxHp) {
+    //     setStats({...stats, hp: recovery})
+    //   } else {
+    //     //if the amount of health is greater than maxhp the hp will be the same as maxhp
+    //     setStats({...stats, hp: stats.maxHp})
+    //   }
+    // }
+
+    switch (item.name) {
+      case 'Healing Potion':
+        let healingPotion = stats.hp+5
+        if (healingPotion <= stats.maxHp) {
+          setStats({...stats, hp: healingPotion})
+        } else {
+          //if the amount of health is greater than maxhp the hp will be the same as maxhp
+          setStats({...stats, hp: stats.maxHp})
+        }
+      break;
+
+      case 'Mana Potion':
+        let manaPotion = stats.mp+10
+        if(manaPotion <= stats.maxMp) {
+          setStats({...stats, mp: manaPotion})
+        } else {
+          setStats({...stats, mp: stats.maxMp})
+        }
+      break;
+    
+      default:
+    }
+
+    //destroy the item after use
+    let itms = [...inventory]
+      let itm = {...inventory[i]}
+      itm.item = {}
+      itms[i] = itm
+      console.log(itms)
+      setInventory([...itms]) 
+
+  }
+
+
+  const closeEverything = () => {
+    setDisplay(false)
+    setDisplayInv(false)
   }
 
   
 
   return (
     <div className="container">
-      <h3>{name} LVL {stats.lvl}</h3>
-      <p>HP {stats.hp}/{stats.maxHp}</p>
-      <p>MP {stats.mp}/{stats.maxMp}</p>
-      <p>Gold: {stats.gold}</p>
+      <div className="playerUI">
+        <h3>{name} LVL {stats.lvl}</h3>
+        <p><img className="playerUI-img" src={hp} alt=""/>HP {stats.hp}/{stats.maxHp}</p>
+        <p><img className="playerUI-img" src={mana} alt=""/>MP {stats.mp}/{stats.maxMp}</p>
+        <p><img className="playerUI-img" src={gold} alt=""/>Gold: {stats.gold}</p>
+      </div>
+      {msg.npc ? 
+        <React.Fragment>
+          <div className="message-box">
+            <p>{msg.npc}</p>
+          </div>
+        </React.Fragment>: null}
  
 
       {displayEnemy ? null :
-        <div>
-          <button onClick={rest}>Rest</button>
-          <button onClick={displayInventory}>Inventory</button>
-          <button onClick={displayStats}>Stats</button><br/>
+        <div className="options-menu">
+          
+         <button onClick={(e) => {if(window.confirm('Want to spend the night for 5 gold?')) rest(e)}}>
+           <img className="options-img" src={bed} alt=""/>
+            {/* Rest */}
+          </button>
+          <button onClick={displayInventory}>
+            <img className="options-img" src={backpack} alt=""/>
+              {/* Inventory */}
+          </button>
+          <button onClick={displayStats}>
+            <img className="options-img" src={statsIcon} alt=""/>
+              {/* Stats */}
+          </button><br/>
         </div>}
       
 
       {/* display inventory */}
       {displayInv ? 
-        <div>
-          <p>inventory slots {inventory.length}</p>
-          {inventory.map((item, i) => (
-            <React.Fragment key={i}>
-              <p>{item.name}</p>
-              {item.use ? <button>Use</button> : null}
-            </React.Fragment>
+        <div className="inventory">
+          {/* <p>Inventory slots {inventory.length}</p> */}
+          {inventory.map((inv, i) => (
+            
+            <div key={i} className="inv">
+              {inv.item.name !== undefined ? 
+              <div>
+              <p>{inv.item.name}</p>
+              <img className="inventory-img" src={inv.item.image} alt=""/>
+              <div className="item-desc">{inv.item.description}</div>
+              {inv.item.use ? <button className="item-btn" onClick={e => usItem(e, inv.item, i)}>Use</button> : null}
+              </div>
+              : null}
+            </div>
+            
           ))}
         </div>
         : null }
       
       {/* display stats */}
       {display ? 
-      <div>
+      <div className="stats">
         <p>Level: {stats.lvl}</p>
         <p>HP: {stats.hp}/{stats.maxHp}</p>
         <p>MP: {stats.mp}/{stats.maxMp}</p>
@@ -227,25 +348,51 @@ const Player = () => {
       </div> 
       : null}
     
-      {msg.battle ? null : <button onClick={battle}>Battle</button>}
+      {msg.battle ? null : 
+        <button className="battle-btn" onClick={battle}>
+          <img className="options-img" onClick={closeEverything} src={swords} alt=""/>
+            {/* Battle */}
+        </button>}
       {displayEnemy && enemyStats.stats.hp > 0 ? 
-      <div>
-        <h3>{enemyStats.name}</h3>
-        <p>Hp: {enemyStats.stats.hp}/{enemyStats.stats.maxHp}</p>
-        <button onClick={attack}>Attack</button>
-        <button>Item</button>
-        <button>Magic</button>
-        <button>Flee</button>  {/*escape with money*/}
+      <div className="battle">
+        <div className="enemy-info">
+          <h3>{enemyStats.name}</h3>
+          <p>Hp: {enemyStats.stats.hp}/{enemyStats.stats.maxHp}</p>
+          <img src={require(`../assets/enemies/${enemyStats.img}`)} alt="" className="enemy-img"/>
+        </div>
+
+        {/* battle actions / buttons */}
+        <div className="battle-actions">
+          <div>
+            <p className="cursor">►</p>
+            <button onClick={attack}>Attack</button>
+          </div>
+          <div >
+            <p className="cursor">►</p>
+            <button onClick={displayInventory}>Item</button>
+
+          </div>
+          <div >
+            <p className="cursor">►</p>
+            <button>Magic</button>
+            </div>
+          <div>
+            <p className="cursor">►</p>
+            <button>Flee</button>
+          </div>
+           {/*escape with money*/}
+        </div>
         
       </div>
       : null}
 
+      {/* messages after battle */}
       {msg.battle ? 
-      <div>
+      <div className="message-box">
         <p>{msg.battle}</p>
         <p>{msg.gains}</p>
         <p>{msg.lvlUp}</p>
-        <button onClick={clearMsg}>Done</button>
+        <button onClick={clearMsg}>Close</button>
       </div>: null}
 
     </div>
